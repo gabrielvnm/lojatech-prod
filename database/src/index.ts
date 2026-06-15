@@ -67,7 +67,6 @@ if (process.env.NODE_ENV === 'production') {
   }
 }
 
-
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error(err.stack)
   res.status(500).json({ error: 'Something went wrong!' })
@@ -85,3 +84,4 @@ app.listen(port, () => {
 })
 
 export default app
+
