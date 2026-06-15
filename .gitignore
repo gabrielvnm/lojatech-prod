@@ -1,0 +1,23 @@
+# Ignore everything in these directories
+**/node_modules/
+**/dist/
+**/.env
+**/.env.*
+**/*.log
+
+# Database files (keep schema but not data)
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+**/*.db-journal
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Railway
+.railway/

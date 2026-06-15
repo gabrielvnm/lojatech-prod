@@ -1,43 +1,3 @@
-// backend development
-
-// import express from 'express'
-// import cors from 'cors'
-// import produtosRouter from './routes/produtos.routes.js'
-// import authRouter from './routes/auth.routes.js'
-// import { authenticateToken } from './middleware/auth.middleware.js'
-
-// const app = express()
-// const port = 3000
-
-
-// app.use(express.json())
-// app.use(cors())  
-
-
-// app.use('/auth', authRouter)
-
-
-// app.use('/produtos', authenticateToken, produtosRouter)
-
-
-// app.use((req, res) => {
-//   res.status(404).json({ 
-//     error: `Route ${req.method} ${req.url} not found`,
-//     availableRoutes: [
-//       'POST /auth/register',
-//       'POST /auth/login',
-//       'GET /produtos (requires auth token)',
-//       'POST /produtos (requires auth token)',
-      
-//     ]
-//   })
-// })
-
-// app.listen(port, () => {
-//     console.log(`Servidor rodando em http://localhost:${port}`)
-//     console.log(`Auth API disponível em http://localhost:${port}/auth`)
-//     console.log(`Produtos API (protegida) em http://localhost:${port}/produtos`)
-// })
 
 import express from 'express'
 import path from 'path'
@@ -57,7 +17,7 @@ const port = process.env.PORT || 3000
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS 
   ? process.env.ALLOWED_ORIGINS.split(',')
-  : ['http://localhost:4200', 'https://lojatech-frontend.railway.app']
+  : ['http://localhost:4200']
 
 app.use(cors({
   origin: allowedOrigins,
@@ -78,13 +38,33 @@ app.get('/health', (req, res) => {
   })
 })
 
-
 if (process.env.NODE_ENV === 'production') {
-  const frontendPath = path.join(__dirname, '../../lojatech/dist/lojatech')
-  app.use(express.static(frontendPath))
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(frontendPath, 'index.html'))
-  })
+  // Look for frontend files in multiple possible locations
+  const possiblePaths = [
+    path.join(__dirname, '../../lojatech/dist/lojatech'),
+    path.join(__dirname, '../lojatech/dist/lojatech'),
+    path.join(process.cwd(), 'lojatech/dist/lojatech')
+  ]
+  
+  let frontendPath = null
+  for (const p of possiblePaths) {
+    if (require('fs').existsSync(p)) {
+      frontendPath = p
+      console.log(`Found frontend at: ${p}`)
+      break
+    }
+  }
+  
+  if (frontendPath) {
+    app.use(express.static(frontendPath))
+    app.get('*', (req, res) => {
+      if (!req.path.startsWith('/api')) {
+        res.sendFile(path.join(frontendPath, 'index.html'))
+      }
+    })
+  } else {
+    console.warn('Frontend dist not found')
+  }
 }
 
 
@@ -103,3 +83,5 @@ app.listen(port, () => {
   console.log(`📦 Environment: ${process.env.NODE_ENV || 'development'}`)
   console.log(`🔗 CORS enabled for: ${allowedOrigins.join(', ')}`)
 })
+
+export default app
