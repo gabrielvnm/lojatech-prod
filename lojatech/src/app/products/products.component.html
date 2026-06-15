@@ -1,0 +1,78 @@
+<div class="main-container">
+    <div *ngIf="mostrarFormUpdate" class="form-container">
+            <div class="formAtualizar">
+                <form class="formulario" [formGroup]="produtoFormUpdate" (ngSubmit)="atualizarProduto()">
+                    <div>
+                        <input formControlName="id" type="hidden">
+                    </div>
+                    <div>
+                        <input formControlName="name" type="text" placeholder="Digite o nome do produto" autocomplete="off">
+                    </div>
+                    <div>
+                        <input formControlName="desc" type="text" placeholder="Descrição do produto" autocomplete="off">
+                    </div>
+                    <div>
+                        <input formControlName="price" type="number" placeholder="Digite o preço" autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn-secondary" [disabled]="produtoFormUpdate.invalid">Atualizar</button>
+
+                    <button type="button" class="btn-secondary" (click)="cancelarAtualizacao()">Cancelar</button>
+                </form>
+            </div>
+    </div>   
+    <ul class="lista1">
+        <li *ngFor="let produto of produtos" class="product-card" style="list-style: none;">
+            <h3 class="product-title">{{ produto.name }}</h3>
+            <p class="product-desc">{{ produto.desc }}</p>
+            <p class="price">{{ produto.price }}</p>
+            <ul class="botoes-lista">
+                <div class="toggle-button-wrapper">
+                    <button class="btn-toggle" (click)="comprarAgora(produto)">Comprar</button>
+                </div>
+                <div class="toggle-button-wrapper">
+                    <button class="btn-toggle" (click)="adicionarAoCarrinho(produto)">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+                <div class="toggle-button-wrapper" *ngIf="admin">            
+                    <button class="btn-toggle" (click)="prepararAtualizacao(produto)">Editar</button>
+                </div>
+                <div class="toggle-button-wrapper" *ngIf="admin">
+                    <button class="btn-toggle" (click)="excluirProduto(produto.id!)">Excluir</button>
+                </div>
+                
+            </ul>
+        </li>
+    </ul>
+    
+    <div class="formProduto" *ngIf="admin">
+        <div class="toggle-button-wrapper">
+            <button class="btn-toggle" (click)="mostrarForm = !mostrarForm">
+                 {{ mostrarForm ? 'Cancelar' : 'Adicionar Produto' }}
+            </button>
+        </div>
+        <div *ngIf="mostrarForm" class="form-container">
+            <form class="formulario" [formGroup]="produtoForm" (ngSubmit)="adicionarProdutos(); mostrarForm = false">
+                <div>
+                    <input type="text" formControlName="name" placeholder="Digite o nome do produto" autocomplete="off">
+                </div>
+                <div>
+                    <input type="text" formControlName="desc" placeholder="Digite uma descrição" autocomplete="off">
+                </div>
+                <div>
+                    <input type="number" formControlName="price" placeholder="Digite o preço" step="0.01">
+                </div>
+                <button type="submit" [disabled]="produtoForm.invalid" class="btn-secondary">
+                    Salvar produto
+                </button>
+                <button type="button" class="btn-secondary" (click)="mostrarForm = false">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    <!-- Add this temporarily for testing
+    <div>
+        <button (click)="toggleAdminMode()" class="btn-secondary">
+            Toggle Admin Mode: {{ admin ? 'Admin' : 'User' }}
+        </button>
+    </div> -->
+</div>  

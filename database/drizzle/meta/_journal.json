@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1779276838848,
+      "tag": "0000_demonic_gauntlet",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1779278129862,
+      "tag": "0001_old_misty_knight",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1781023301276,
+      "tag": "0002_add_users_table",
+      "breakpoints": true
+    }
+  ]
+}

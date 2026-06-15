@@ -1,0 +1,12 @@
+.container404{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+}
+.texto{
+    color: red;
+    font-size: 40px;
+    justify-content: center;
+    align-self: center;
+}

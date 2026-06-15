@@ -1,0 +1,26 @@
+.login-btn {
+    background: linear-gradient(105deg, #0e6b3a, #1e6ec5);
+    border: none;
+    padding: 0.7rem 1.8rem;
+    border-radius: 60px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 5px 12px rgba(0, 80, 70, 0.2);
+    backdrop-filter: blur(2px);
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(105deg, #0a572f, #0f5db3);
+    box-shadow: 0 12px 20px -8px rgba(0, 110, 90, 0.4);
+}
+
+.login-btn:active {
+    transform: translateY(1px);
+}

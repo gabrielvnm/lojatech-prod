@@ -1,0 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, 'Segoe UI', 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(145deg, #343f34 0%, #498ed7 100%);
+    color: #0a2f2f;
+    min-height: 100vh;
+}

@@ -1,0 +1,78 @@
+<div class="construction-container">
+  <div class="construction-content">
+    <!-- Animated Construction Icon -->
+    <div class="icon-wrapper">
+      <i [class]="icon"></i>
+      <i class="fa-solid fa-screwdriver-wrench tools-icon"></i>
+    </div>
+
+    <!-- Title -->
+    <h1 class="construction-title">
+      {{ pageName }} em Construção
+    </h1>
+
+    <!-- Status Badge -->
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      Em desenvolvimento
+    </div>
+
+    <!-- Description -->
+    <p class="construction-message">
+      {{ message }}
+    </p>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-label">
+        <span>Progresso</span>
+        <span>65%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- Features Coming Soon -->
+    <div class="features-coming">
+      <h3>Funcionalidades planejadas:</h3>
+      <ul>
+        <li>
+          <i class="fa-solid fa-check-circle"></i>
+          <span>Sistema de busca avançada</span>
+        </li>
+        <li>
+          <i class="fa-solid fa-check-circle"></i>
+          <span>Filtros personalizados</span>
+        </li>
+        <li>
+          <i class="fa-solid fa-check-circle"></i>
+          <span>Painel administrativo</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Estimated Time -->
+    <div class="estimated-time">
+      <i class="fa-solid fa-clock"></i>
+      <span>Previsão de lançamento: {{ estimatedCompletion }}</span>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="btn-primary-const" routerLink="/">
+        <i class="fa-solid fa-home"></i>
+        Voltar para Home
+      </button>
+    </div>
+
+    <!-- Contact Support -->
+    <div class="contact-support">
+      <p>Precisa de ajuda? </p>
+      <a href="mailto:suporte@lojatech.com">
+        <i class="fa-solid fa-envelope"></i>
+        Fale conosco
+      </a>
+    </div>
+  </div>
+</div>

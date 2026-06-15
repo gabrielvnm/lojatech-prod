@@ -1,0 +1,74 @@
+.store-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid rgba(0, 100, 80, 0.25);
+}
+
+.brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.brand h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #0f6b3a, #1a73e8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.brand-tag {
+    background: rgba(26, 115, 232, 0.12);
+    padding: 0.25rem 0.85rem;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #1bce66;
+    border-left: 2px solid #2ecc71;
+}
+
+.barra-nav ul {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.barra-nav a {
+    padding: 10px 10px;
+    color: var(--gray);
+    font-weight: 400;
+    font-size: 22px;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+}
+
+.barra-nav a:hover {
+    background-color: var(--blue);
+    color: #1bce66;
+}
+
+.container-menu {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    flex: 1;
+}
+
+.badge-carrinho {
+    background-color: var(--dark-blue);
+    padding: 5px 10px;    
+    border-radius: 4px;
+    color: white;
+}
+
+li {
+  list-style-type: none;
+}

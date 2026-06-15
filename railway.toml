@@ -1,0 +1,15 @@
+[environments.production]
+  [environments.production.services.backend]
+    source = "database"
+    build = "Dockerfile"
+    healthcheck = "/health"
+    ports = ["3000"]
+    
+  [environments.production.services.frontend]
+    source = "lojatech"
+    build = "Dockerfile"
+    ports = ["80"]
+    domains = ["lojatech-frontend.railway.app"]
+    routes = [
+      { src = "/.*", dest = "http://frontend:80" }
+    ]

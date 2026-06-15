@@ -1,0 +1,35 @@
+
+<div class="main-carrinho">
+    <section class="carrinho-container">
+
+        <div *ngIf="(itens$ | async)?.length === 0" class="vazio">
+        <p class="texto">Seu carrinho está vazio!</p>
+        </div>
+
+        <div *ngFor="let item of itens$ | async">
+            <div class="cart-item">
+                <h3 class="product-title">{{ item.name }}</h3>
+                <p class="product-desc">{{ item.desc }}</p>
+                <p class="product-price">Preço: {{ item.price | currency: "BRL"}}</p>
+                
+                <div class="quantity-controls">
+                    <button class="btn-toggle" (click)="atualizarQuantidade(item, item.quantidade - 1)">-</button>
+                    <span class item-quantidade>{{ item.quantidade }}</span>
+                    <button class="btn-toggle" (click)="atualizarQuantidade(item, item.quantidade + 1)">+</button>
+                </div>
+                
+                <p>Subtotal: {{ item.price * item.quantidade | currency: "BRL" }}</p>
+                <button class="btn-toggle" (click)="removerItem(item.id)">Remover</button>
+            </div>
+        </div>
+
+
+    </section>
+    <div class="btn-container">
+        <div *ngIf="(itens$ | async)?.length! > 0">
+            <h3>Total: {{ total$ | async | currency: "BRL" }}</h3>
+            <button class="btn-secondary" (click)="limparCarrinho()">Limpar Carrinho</button>
+            <button class="btn-secondary" (click)="finalizarCompra()">Finalizar Compra</button>
+        </div>
+    </div>
+</div>

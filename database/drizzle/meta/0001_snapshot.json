@@ -1,0 +1,59 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "7df87a63-3094-4f20-b469-280560a52760",
+  "prevId": "00420dab-a47e-4c6d-aa3c-756b01873009",
+  "tables": {
+    "produtos": {
+      "name": "produtos",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "desc": {
+          "name": "desc",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "price": {
+          "name": "price",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {
+      "\"produtos\".\"nome\"": "\"produtos\".\"name\"",
+      "\"produtos\".\"preco\"": "\"produtos\".\"price\""
+    }
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

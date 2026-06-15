@@ -1,0 +1,286 @@
+.construction-container {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #0f6b3a, #1a73e8);
+}
+
+.construction-content {
+  max-width: 700px;
+  width: 100%;
+  background: rgba(43, 204, 113, 0.5);
+  border-radius: 30px;
+  padding: 50px 40px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Icon Wrapper */
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.icon-wrapper i:first-child {
+  font-size: 5rem;
+  color: #f39c12;
+  animation: bounce 2s infinite;
+}
+
+.tools-icon {
+  font-size: 2rem;
+  color: #e67e22;
+  position: absolute;
+  bottom: -10px;
+  right: -20px;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Title */
+.construction-title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffeaa7;
+  padding: 8px 16px;
+  border-radius: 50px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: #d63031;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #d63031;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+/* Message */
+.construction-message {
+  font-size: 1.1rem;
+  color: #636e72;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-bottom: 30px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.progress-bar {
+  height: 10px;
+  background-color: #dfe6e9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 65%;
+  height: 100%;
+  background: linear-gradient(90deg, #f39c12, #e67e22);
+  border-radius: 10px;
+  animation: fillProgress 2s ease-out;
+}
+
+@keyframes fillProgress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 65%;
+  }
+}
+
+/* Features Coming Soon */
+.features-coming {
+  text-align: left;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+
+.features-coming h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.features-coming ul {
+  list-style: none;
+  padding: 0;
+}
+
+.features-coming li {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #636e72;
+}
+
+.features-coming li i {
+  color: #27ae60;
+  font-size: 1rem;
+}
+
+/* Estimated Time */
+.estimated-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ecf0f1;
+  padding: 10px 20px;
+  border-radius: 50px;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.estimated-time i {
+  color: #f39c12;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.btn-primary-const, .btn-secondary-const {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.btn-primary-const {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-primary-const:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary-const {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+.btn-secondary-const:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Contact Support */
+.contact-support {
+  padding-top: 20px;
+  border-top: 1px solid #dfe6e9;
+  color: #636e72;
+}
+
+.contact-support a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.contact-support a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .construction-content {
+    padding: 30px 20px;
+  }
+  
+  .construction-title {
+    font-size: 1.8rem;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .btn-primary-const, .btn-secondary-const {
+    justify-content: center;
+  }
+}
