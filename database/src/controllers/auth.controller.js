@@ -10,8 +10,9 @@ const JWT_EXPIRES_IN = '7d';
 export async function register(req, res) {
     const validationResult = registerUserDto.safeParse(req.body);
     if (!validationResult.success) {
-        res.status(400).json({ erros: validationResult.error.flatten().fieldErrors });
-        return;
+        const errors = validationResult.error.flatten().fieldErrors
+        res.status(400).json({ erros: errors })
+        return
     }
     const { name, email, password } = validationResult.data;
     const existingUser = db.select().from(users).where(eq(users.email, email)).get();
