@@ -7,18 +7,17 @@ COPY package*.json ./
 COPY database/package*.json ./database/
 COPY lojatech/package*.json ./lojatech/
 
-# Install all dependencies
-RUN npm install
-RUN cd database && npm install
-RUN cd lojatech && npm install
+# Install dependencies
+RUN npm install --prefix database
+RUN npm install --prefix lojatech
 
 # Build backend
 COPY database ./database
-RUN cd database && npm run build
+RUN npm run build --prefix database
 
 # Build frontend
 COPY lojatech ./lojatech
-RUN cd lojatech && npm run build -- --configuration=production
+RUN npm run build --prefix lojatech -- --configuration=production
 
 # Create data directory for SQLite
 RUN mkdir -p /data
