@@ -5,5 +5,9 @@
   "scripts": {
     "build": "cd database && npm install && npm run build && cd ../lojatech && npm install && npm run build -- --configuration=production",
     "start": "cd database && npm start"
+  },
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
   }
 }
