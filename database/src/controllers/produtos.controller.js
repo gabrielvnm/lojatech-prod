@@ -63,6 +63,13 @@ export function atualizarProduto(req, res) {
         res.status(400).json({ erros: resultado.error.flatten().fieldErrors });
         return;
     }
+    const updateData = {};
+    if (resultado.data.name !== undefined)
+        updateData.name = resultado.data.name;
+    if (resultado.data.desc !== undefined)
+        updateData.desc = resultado.data.desc;
+    if (resultado.data.price !== undefined)
+        updateData.price = resultado.data.price;
     // PATCH sem nenhum campo: nada a atualizar
     if (Object.keys(resultado.data).length === 0) {
         res.status(400).json({ erro: 'Envie ao menos um campo para atualizar.' });
@@ -70,7 +77,7 @@ export function atualizarProduto(req, res) {
     }
     const atualizado = db
         .update(produtos)
-        .set(resultado.data)
+        .set(updateData)
         .where(eq(produtos.id, id))
         .returning()
         .get();
