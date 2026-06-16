@@ -6,7 +6,7 @@
   },
   "scripts": {
     "build:backend": "cd database && npm install --include=dev && npm run build",
-    "build:frontend": "cd lojatech && npm install && ./node_modules/.bin/ng build",
+    "build:frontend": "cd lojatech && npm install && npm install -g @angular/cli@14 && ng build",
     "start:frontend": "cd lojatech && npx serve dist/lojatech -l 10000",
     "start:backend": "cd database && npm start"
   }
