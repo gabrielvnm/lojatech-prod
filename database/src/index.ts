@@ -1,87 +1,68 @@
+// backend production
+
+// import express from 'express'
+// import produtosRouter from './routes/produtos.routes.js'
+// import cors from 'cors'
+// import path from 'path'
+// import { fileURLToPath } from 'url'
+
+// const __filename = fileURLToPath(import.meta.url)
+// const __dirname = path.dirname(__filename)
+
+// const app = express()
+// const port = 3000
+
+// app.use(express.json())
+// app.use(cors())
+
+// app.use(express.static(path.join(__dirname, '../public')))
+// app.use('/produtos', produtosRouter)
+
+// app.use((req, res) => {
+//   res.sendFile(path.join(__dirname, '../public', 'index.html'))
+// })
+
+// app.listen(port, () => {
+//     console.log(`Servidor rodando em http://localhost:${port}`)
+// })
+
+// backend development
 
 import express from 'express'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import cors from 'cors'
 import produtosRouter from './routes/produtos.routes.js'
 import authRouter from './routes/auth.routes.js'
-import cors from 'cors'
-import dotenv from 'dotenv'
-
-dotenv.config()
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+import { authenticateToken } from './middleware/auth.middleware.js'
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = 3000
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS 
-  ? process.env.ALLOWED_ORIGINS.split(',')
-  : ['http://localhost:4200']
 
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true
-}))
 app.use(express.json())
+app.use(cors())  
 
 
-app.use('/api/produtos', produtosRouter)
-app.use('/api/auth', authRouter)
+app.use('/auth', authRouter)
 
 
-app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime()
-  })
-})
-
-if (process.env.NODE_ENV === 'production') {
-  // Look for frontend files in multiple possible locations
-  const possiblePaths = [
-    path.join(__dirname, '../../lojatech/dist/lojatech'),
-    path.join(__dirname, '../lojatech/dist/lojatech'),
-    path.join(process.cwd(), 'lojatech/dist/lojatech')
-  ]
-  
-  let frontendPath = null
-  for (const p of possiblePaths) {
-    if (require('fs').existsSync(p)) {
-      frontendPath = p
-      console.log(`Found frontend at: ${p}`)
-      break
-    }
-  }
-  
-  if (frontendPath) {
-    app.use(express.static(frontendPath))
-    app.get('*', (req, res) => {
-      if (!req.path.startsWith('/api')) {
-        res.sendFile(path.join(frontendPath, 'index.html'))
-      }
-    })
-  } else {
-    console.warn('Frontend dist not found')
-  }
-}
-
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.error(err.stack)
-  res.status(500).json({ error: 'Something went wrong!' })
-})
+app.use('/produtos', authenticateToken, produtosRouter)
 
 
 app.use((req, res) => {
-  res.status(404).json({ error: `Route ${req.method} ${req.url} not found` })
+  res.status(404).json({ 
+    error: `Route ${req.method} ${req.url} not found`,
+    availableRoutes: [
+      'POST /auth/register',
+      'POST /auth/login',
+      'GET /produtos (requires auth token)',
+      'POST /produtos (requires auth token)',
+      
+    ]
+  })
 })
 
 app.listen(port, () => {
-  console.log(`🚀 Server running on port ${port}`)
-  console.log(`📦 Environment: ${process.env.NODE_ENV || 'development'}`)
-  console.log(`🔗 CORS enabled for: ${allowedOrigins.join(', ')}`)
+    console.log(`Servidor rodando em http://localhost:${port}`)
+    console.log(`Auth API disponível em http://localhost:${port}/auth`)
+    console.log(`Produtos API (protegida) em http://localhost:${port}/produtos`)
 })
-
-export default app
-
