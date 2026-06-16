@@ -2,11 +2,7 @@
   "name": "lojatech-monorepo",
   "version": "1.0.0",
   "scripts": {
-    "build:backend": "cd database && npm install && npm run build",
-    "build:frontend": "cd lojatech && npm install && npm run build",
-    "start:backend": "cd database && npm start"
-  },
-  "engines": {
-    "node": "20.x"
+    "build:backend": "cd database && npm install --include=dev && npm run build",
+    "build:frontend": "cd lojatech && npm install && npm run build"
   }
 }
