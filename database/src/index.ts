@@ -1,5 +1,6 @@
 // backend development
-import express from 'express'
+import express from 'express';
+import type { Request, Response } from 'express';
 import cors from 'cors'
 import produtosRouter from './routes/produtos.routes.js'
 import authRouter from './routes/auth.routes.js'
