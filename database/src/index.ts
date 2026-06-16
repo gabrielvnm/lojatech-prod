@@ -1,68 +1,62 @@
-// backend production
-
-// import express from 'express'
-// import produtosRouter from './routes/produtos.routes.js'
-// import cors from 'cors'
-// import path from 'path'
-// import { fileURLToPath } from 'url'
-
-// const __filename = fileURLToPath(import.meta.url)
-// const __dirname = path.dirname(__filename)
-
-// const app = express()
-// const port = 3000
-
-// app.use(express.json())
-// app.use(cors())
-
-// app.use(express.static(path.join(__dirname, '../public')))
-// app.use('/produtos', produtosRouter)
-
-// app.use((req, res) => {
-//   res.sendFile(path.join(__dirname, '../public', 'index.html'))
-// })
-
-// app.listen(port, () => {
-//     console.log(`Servidor rodando em http://localhost:${port}`)
-// })
-
 // backend development
-
 import express from 'express'
 import cors from 'cors'
 import produtosRouter from './routes/produtos.routes.js'
 import authRouter from './routes/auth.routes.js'
 import { authenticateToken } from './middleware/auth.middleware.js'
+import path from 'path';
+import { fileURLToPath } from 'url'
 
 const app = express()
-const port = 3000
-
+const port = process.env.PORT || 3000
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.json())
-app.use(cors())  
+app.use(cors())
 
+// --- HEALTH CHECK ---
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'ok', 
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
 
-app.use('/auth', authRouter)
+// --- API ROUTES with /api prefix ---
+app.use('/api/auth', authRouter)
+app.use('/api/produtos', authenticateToken, produtosRouter)
 
-
-app.use('/produtos', authenticateToken, produtosRouter)
-
-
-app.use((req, res) => {
-  res.status(404).json({ 
-    error: `Route ${req.method} ${req.url} not found`,
-    availableRoutes: [
-      'POST /auth/register',
-      'POST /auth/login',
-      'GET /produtos (requires auth token)',
-      'POST /produtos (requires auth token)',
-      
-    ]
+// --- PRODUCTION: Serve Angular static files ---
+if (process.env.NODE_ENV === 'production') {
+  const staticPath = path.join(__dirname, '../../lojatech/dist/lojatech');
+  console.log(`Serving static files from: ${staticPath}`);
+  app.use(express.static(staticPath));
+  
+  // For any non-API routes, serve the Angular app
+  app.get(/.*/, (req, res) => {
+    res.sendFile(path.join(staticPath, 'index.html'));
+  });
+} else {
+  // --- DEVELOPMENT: 404 handler for API routes only ---
+  app.use((req, res) => {
+    res.status(404).json({ 
+      error: `Route ${req.method} ${req.url} not found`,
+      availableRoutes: [
+        'GET /health',
+        'POST /api/auth/register',
+        'POST /api/auth/login',
+        'GET /api/produtos (requires auth token)',
+        'POST /api/produtos (requires auth token)',
+      ]
+    })
   })
-})
+}
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`)
-    console.log(`Auth API disponível em http://localhost:${port}/auth`)
-    console.log(`Produtos API (protegida) em http://localhost:${port}/produtos`)
+    console.log(`Ambiente: ${process.env.NODE_ENV || 'development'}`)
+    console.log(`Auth API disponível em http://localhost:${port}/api/auth`)
+    console.log(`Produtos API (protegida) em http://localhost:${port}/api/produtos`)
 })
