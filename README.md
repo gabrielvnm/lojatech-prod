@@ -1,58 +1,41 @@
 # progweb-UCB
 
-Matéria de extensão - Programação Web da Universidade Católica de Brasília, 2026
-branch prod: branch mais atualizada, backend conectado com banco de dados
+Matéria de extensão - Programação Web da Universidade Católica de Brasília, 2026. Repositório contendo o projeto para deploy em produção.
 
-## Inicialização
-Passos para inicialização do projeto.
+## Instruções
 
-Clonar o projeto na máquina atual:
-```bash
-git clone https://github.com/gabrielvnm/progweb-UCB.git
-```
-O front end usa versão node 16, o back usa versão 22. Para garantir o funcionamento do projeto, usar nvm para trocar de versão ao iniciar cada pasta.
+Neste repositório se encontra o código fonte do projeto production ready. A plataforma escolhida para o deploy foi o Render. Como o frontend e o backend necessitam de versões diferentes do node, preferi criar dois serviços, um para o front e outro para o back.
 
-```bash
-nvm install 22
-nvm install 16
-nvm list
-```
+O projeto pode ser acessado através de: https://lojatech-app.onrender.com/ 
 
-nvm list para listar as versões instaladas, os outros comandos instalam as versões necessárias. Para inicializar o front e o back, navegue pelo terminal até o root das pastas /techstore e /database antes de rodar os comandos.
+Essa URL contém o frontend, que manda requisições para outro serviço em https://lojatech-back.onrender.com/
 
+A requisição inicial pode demorar um pouco, na versão grátis do Render a CPU e RAM são limitadas, o que impacta na velocidade. Após alguns minutos sem requisições, tanto o front quanto o back entram num estado de suspensão. Qualquer requisição enviada após o início da suspensão deve aguardar o início tanto do front quanto do back. Caso a lista de produtos não carregue, é sinal de que o serviço de backend ainda não foi carregado completamente, aguarde alguns minutos para tentar novamente.
 
-### /lojatech
-
-Essa pasta contem o frontend, usando angular 14. É necessário trocar a versão do node para 16.
+É possível mandar chamadas de API manualmente para o backend usando curl, por exemplo:
 
 ```bash
-nvm use 16
-npm install
-npm start
-ls node_modules
-
-```
-ls node_modules verifica a versão do node.
-
-npm start inicia o servidor na pasta /techstore no link http://localhost:4200/
-
-### /database
-
-Essa pasta contém o backend conectado com banco de dados SQLite.
-
-```bash
-nvm use 22
-npm install
-npm run dev
-rm -rf node_modules
+curl -X POST https://lojatech-back.onrender.com/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@email.com","password":"password"}'
 ```
 
-Essa pasta não tem o node_modules no gitignore. Caso ocorram problemas na instalação, use rm -rf node_modules seguido de npm install.
+Como as rotas do backend são protegidas, é necessário inserir um email e senha válidos que existam no banco de dados para a autenticação. Após a autenticação, é possível acessar as outras rotas.
 
-npm run dev inicializa o servidor da pasta server, roda em http://localhost:3000/
+A lista de produtos também necessita de autenticação para ser acessada pelo front. Por padrão, o CRUD para adicionar e remover produtos só pode ser utilizado por usuários com acesso de admin. Ao criar um novo usuário, o acesso é user, e permite ver a lista de produtos, mas não adicionar, remover ou editar os produtos.
 
-route da API de produtos: 
-http://localhost:3000/produtos/
+Para utilizar as funcionalidades de CRUD, utilize o acesso de administrador: 
 
-Após inicializar o front e back, testar o CRUD do front em http://localhost:4200/
+ - user: gabriel@email.com
+ - pswd: asdf1234
+
+## Estrutura
+
+No root do projeto estão o arquivo README, um package.json com parâmetros para o deploy, e as pastas contendo o frontend e o backend. O código-fonte do front pode ser acessado na pasta /lojatech, enquanto o back se encontra na pasta /database. O front foi construído usando Angular14. O back usa Express e conecta com um banco de dados SQLite.
+
+## Autor
+
+Projeto criado por Gabriel Martins, matrícula UC24200813.
+
+
 
