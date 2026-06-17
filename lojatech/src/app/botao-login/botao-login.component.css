@@ -24,3 +24,12 @@
 .login-btn:active {
     transform: translateY(1px);
 }
+
+.login-btn a {
+    padding: 10px 10px;
+    color: gray;
+    font-weight: 400;
+    font-size: 22px;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+}

@@ -24,7 +24,7 @@
         <li *ngFor="let produto of produtos" class="product-card" style="list-style: none;">
             <h3 class="product-title">{{ produto.name }}</h3>
             <p class="product-desc">{{ produto.desc }}</p>
-            <p class="price">{{ produto.price }}</p>
+            <p class="price">{{ produto.price | currency: "BRL"}}</p>
             <ul class="botoes-lista">
                 <div class="toggle-button-wrapper">
                     <button class="btn-toggle" (click)="comprarAgora(produto)">Comprar</button>
@@ -69,10 +69,4 @@
             </form>
         </div>
     </div>
-    <!-- Add this temporarily for testing
-    <div>
-        <button (click)="toggleAdminMode()" class="btn-secondary">
-            Toggle Admin Mode: {{ admin ? 'Admin' : 'User' }}
-        </button>
-    </div> -->
 </div>  
