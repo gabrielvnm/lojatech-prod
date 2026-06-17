@@ -2,7 +2,9 @@
 
 Matéria de extensão - Programação Web da Universidade Católica de Brasília, 2026. Repositório contendo o projeto para deploy em produção.
 
-Repositório disponível em: https://github.com/gabrielvnm/lojatech-prod
+ - Repositório disponível em: https://github.com/gabrielvnm/lojatech-prod
+
+ - Pitch do projeto: https://youtu.be/jvfa4mHd4h4
 
 Este projeto consiste em uma aplicação web fullstack para uma loja de produtos de informática, e inclui funcionalidades para criação e autenticação de usuários, lista de produtos e carrinho. A aplicação implementa um CRUD básico para a lista de produtos. A autenticação dos usuários e a lista de produtos são obtidos por requisições para o backend da aplicação, que se conecta com um banco de dados SQLite. A funcionalidade de carrinho utiliza o localstorage, e não realiza requisições ao backend.
 
@@ -39,6 +41,9 @@ A funcionalidade da lista de produtos só pode ser acessada após a autenticaç�
 O carrinho obtém uma lista de produtos do localstorage, que persiste entre sessões. É possível remover ou adicionar mais unidades de um mesmo item clicando nos respectivos botões. Abaixo da lista de itens no carrinho é realizado o cálculo em tempo real do preço total dos itens, conforme a quantidade for modificada. Ao clicar em Comprar ou Limpar Carrinho, a lista do localstorage é esvaziada, e o botão de comprar exibe uma mensagem de sucesso.
 
 Para realizar as operações de CRUD, é necessário estar autenticado como **admin**. Para obter um acesso admin, entre em contato com o mantenedor do repositório.
+
+ - user: gabriel@email.com
+ - pswd: asdf1234
 
 O estado de admin faz com que novos botões sejam exibidos na lista de produtos, para Adicionar, Remover ou Editar um produto. Para que haja persistência de dados real, é necessário que o projeto seja executado localmente.
 
