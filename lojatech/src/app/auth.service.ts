@@ -27,9 +27,14 @@ export interface RegisterData {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://lojatech-back.onrender.com/api/auth';
+  //private apiUrl = 'https://lojatech-back.onrender.com/api/auth';
+  private apiUrl = environment.production 
+    ? 'https://lojatech-back.onrender.com/api/auth'  // Production
+    : 'http://localhost:3000/api/auth';  // Development
+
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
+
 
   constructor(private http: HttpClient) {
     this.loadStoredUser();

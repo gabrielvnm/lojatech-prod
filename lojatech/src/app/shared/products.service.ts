@@ -7,8 +7,10 @@ import { environment } from "src/environments/environment";
 @Injectable({providedIn:'root'})
 
 export class Products{
-    apiURL = 'https://lojatech-back.onrender.com/api/produtos';
-
+    //apiURL = 'https://lojatech-back.onrender.com/api/produtos';
+    apiURL = environment.production 
+        ? 'https://lojatech-back.onrender.com/api/produtos'  // Production
+        : 'http://localhost:3000/api/produtos';  // Development
 
     constructor(private http:HttpClient){}
 
